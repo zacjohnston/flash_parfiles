@@ -1,0 +1,247 @@
+# Parameters file for 1D M1 Core Collapse with MLT
+basenm			      = "run_"
+restart			      = False
+checkpointFileNumber          = 0
+output_directory	      = "output"
+
+# IO
+wr_integrals_freq	           = 10
+checkpointFileIntervalStep     = 0
+checkpointFileIntervalTime     = 0.001
+plotFileIntervalStep           = 0
+plotFileIntervalTime           = 0.00
+particleFileIntervalTime       = 0.000
+wall_clock_time_limit          = 200000
+
+#particles
+useparticles = .false.
+pt_dtfactor  = 0.5
+pt_numR      = 200
+pt_numT      = 160
+pt_numP      = 1
+
+pt_initialRMin   = 1.97d8 #unique to every progenitor and t_init, center around region of interest
+pt_initialRMax   = 7.0d8 #unique to every progenitor and t_init, center around region of interest
+pt_initialCTMin  = -1.0d0
+pt_initialCTMax  = 1.0d0
+pt_initialPMin   = 0.0d0
+pt_initialPMax   = 6.2831853072d0
+pt_maxPerProc    = 32000
+
+# Time
+tinitial              = 0.
+tmax                  = 1.1
+nend                  = 1000000000
+#nend                 = 1
+tstep_change_factor   = 1.05
+dtinit                = 1.E-8
+dtmax                 = 1.E5
+dtmin                 = 1.E-20
+
+# Domain
+geometry           = "spherical"
+xmin               = 0.0
+xmax               = 1.5e9
+xl_boundary_type   = "reflect"
+xr_boundary_type   = "user"
+
+# Grid/Refinement
+nblockx            = 15
+nblocky            = 1
+nblockz            = 1
+
+gr_lrefineMaxRedDoByLogR  = True
+gr_angularResolution      = 0.5
+fullangrefrad             = 3e7
+
+lrefine_center		= 9
+lrefine_max         = 9
+lrefine_min         = 1
+refine_var_1        = "dens"
+refine_var_2        = "pres"
+refine_var_3        = "none"
+refine_var_4        = "none"
+refine_cutoff_1		= 0.8
+refine_cutoff_2		= 0.8
+refine_cutoff_3		= 0.8
+refine_cutoff_4		= 0.8
+
+# Simulation
+model_file             = "progenitors/mesa20_204to21_coll.1d"
+#rnd_seed		       = 1000
+#rnd_scale 		       = 0.001
+nsub                   = 4
+vel_mult               = 1.0
+ener_exp               = 0.0
+r_exp_max              = 0.0
+r_exp_min              = 0.0
+mass_loss              = 1.0e-4 # Solar masses per year
+vel_wind               = 1.0e4  # cm/s
+use_PnotT		       = .FALSE.
+rot_a			       = 8.0e7
+rot_omega		       = 0.
+use_perturb		       = .false.
+mag_e			       = 1.0e18
+perturb_radMax		   = 2.4e8
+perturb_radMin		   = 1.82952e8
+perturb_nodes		   = 5
+perturb_mag		       = 0.2
+mri_refine		       = .false.
+mri_time		       = 0.0
+alwaysRefineShock	   = .false.
+
+# Hydro
+useHydro                       = .TRUE.
+cfl                            = 0.5
+interpol_order                 = 2
+updateHydroFluxes              = .TRUE.
+eintSwitch		               = 0.0 # Always use Etot
+#convertToConsvdForMeshCalls   = .false.
+#converttoconsvdinmeshinterp   = .false.
+
+##  SWITCHES SPECIFIC TO THE UNSPLIT HYDRO SOLVER               ##
+#       I. INTERPOLATION SCHEME:
+order              = 3          # Interpolation order (first/second/third/fifth order)
+slopeLimiter       = "hybrid"   # Slope limiters (minmod, mc, vanLeer, hybrid, limited)
+LimitedSlopeBeta   = 1.         # Slope parameter for the "limited" slope by Toro
+charLimiting       = .true.     # Characteristic limiting vs.Primitive limiting
+
+use_avisc          = .true.  # use artificial viscosity (originally for PPM)
+cvisc              = 0.2     # coefficient for artificial viscosity
+use_flattening     = .true.  # use flattening (dissipative) (originally for PPM)
+use_steepening     = .false. # use contact steepening (originally for PPM)
+use_upwindTVD      = .false. # use upwind biased TVD slope for PPM (need nguard=6)
+flux_correct       = .true.
+
+#       II. RIEMANN SOLVERS:
+RiemannSolver      = "HLLC"       # Roe, HLL, HLLC, LLF, Marquina
+entropy            = .false.      # Entropy fix for the Roe solver
+EOSforRiemann      = .true.
+use_hybridRiemann  = .true.
+
+#       III. STRONG SHOCK HANDELING SCHEME:
+shockDetect        = .true.     # Shock Detect for numerical stability
+shockLowerCFL 	   = .false.
+
+## -------------------------------------------------------------##
+
+# Gravity
+useGravity                  = .true.
+updateGravity               = .TRUE.
+grav_boundary_type          = "isolated"
+mpole_3daxisymmetry         = .false.
+mpole_dumpMoments           = .FALSE.
+mpole_PrintRadialInfo	    = .false.
+mpole_IgnoreInnerZone	    = .false.
+mpole_lmax                  = 0
+mpole_ZoneRadiusFraction_1  = 1.0
+mpole_ZoneExponent_1        = 0.005
+mpole_ZoneScalar_1	        = 0.5
+mpole_ZoneType_1	        = "logarithmic"
+point_mass                  = 0.0
+point_mass_rsoft            = 0.e0
+use_gravHalfUpdate          = .TRUE.
+use_gravConsv		        = .FALSE.
+use_gravPotUpdate	        = .FALSE.
+mpole_useEffectivePot       = .true.
+mpole_EffPotNum 	        = 1000
+
+# Hole
+useHole			= .FALSE.
+hole_radius		= 0.0 #2.0e8
+hole_bnd		= 1 #diode=0, reflect=1, outflow=2
+hole_time		= 0.0 #3.0
+hole_vel		= 0.0 #1.0e7
+
+# Nuclear Burning
+ useBurn             = True
+ useBurnTable        = .FALSE.
+ burnUpdateEint      = .FALSE.
+ enucDtFactor        = 1.e30
+ nuclearDensMax      = 1.0E17
+ nuclearDensMin      = 1.0E-10
+ nuclearNI56Max      = 1.0
+ nuclearTempMax      = 1.0E12
+ nuclearTempMin      = 1.1E8
+ odeStepper          = 1
+ algebra             = 1
+ useShockBurn        = .FALSE.
+ bn_useNSE           = True
+ nse_dens            = 1e9
+
+#MLT
+useMLT        = False
+mlt_alphaL    = 0.0
+mlt_Dneut     = 0.166666666667
+mlt_Dye       = 0.166666666667
+mlt_Deint     = 0.166666666667
+mlt_Detrb     = 0.166666666667
+
+# EOS
+eos_file                  = "EoSTables/SFHo.h5"
+eosMode                   = "dens_ie"
+eosModeInit               = "dens_temp"
+#eos_coulombAbort         = .true.
+#eos_coulombMult          = 0.0
+#eos_forceConstantInput   = .false.
+#eos_maxNewton            = 50
+#eos_singleSpeciesA       = 1.00
+#eos_singleSpeciesZ       = 1.00
+#eos_tolerance            = 1.e-8
+gamma                     = 1.2
+#eos_table_tmax			  = 50.
+eos_hybTransitionDens     = 6e7
+eos_hybTransitionLow      = 1e7
+eos_hybDecrease           = 1e-2
+eos_avoidfreezing         = True
+
+# Deleptonization
+useDeleptonize		= .false.
+delep_Enu		    = 10.0 # MeV
+delep_rhoOne		= 3.0e7 #3.0e7
+delep_rhoTwo		= 2.0e13 #2.0e13
+delep_rhoThree		= 2.0e14
+delep_yOne		    = 0.5
+delep_yTwo		    = 0.278 #0.278
+delep_yc		    = 0.035 #0.035
+bounceTime		    = 0.0 #0.248
+postBounce		    = False
+useEntr 		    = .true.
+
+# RadTrans/M1
+rt_useRadTrans	 = .true.
+rt_NumGroups	 = 12 #must match m1_groups used in setup
+rt_opacTable	 = "EoSTables/NuLib_SFHo.h5"
+rt_dtFactor		 = 0.6
+rt_rkTime		 = True
+rt_doVel		 = True
+rt_doIES         = True
+rt_pushFac       = 1.0e0
+
+# Neutrino Heating/Cooling
+useHeat			       = .false.
+Lneut			       = 2.2e52
+Tneut			       = 4.0 #MeV
+heatTimeFac		       = 1.0e4
+useHalfState		   = .false.
+
+# EnergyDeposition - Jets
+useEnergyDeposition	  = .FALSE.
+#jetAngleN		      = 0.52
+#jetAngleS		      = 0.52
+#jetAccN		      = 5.0e10
+#jetAccS		      = 1.0e10
+#jetTimeN		      = 2.0
+#jetTimeS		      = 0.0
+#jetRad			      = 4.0e8
+#heat_fact		      = 1.0
+			      			       
+# Small numbers
+smallt    = 1.2e0
+smlrho    = 1.e-10
+smallp    = 1.E-20
+smalle    = -1.e50
+
+smallu    = 1.E-10
+smallx    = 1.E-20
+small     = 1.E-100
