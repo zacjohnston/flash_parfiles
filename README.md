@@ -1,3 +1,3 @@
 # flash_parfiles
 
-Collection of `flash.par` files for various model setups
+Collection of `flash.par` parameter files for various FLASH model setups.
