@@ -1,13 +1,13 @@
-# Parameters file for 1D M1 Core Collapse with MLT
-basenm			      = "run_"
+# Parameters file for 1D M1 Core Collapse with NucNet + Helmholtz 
+basenm			      = "helmnet_"
 restart			      = False
-checkpointFileNumber          = 0
-output_directory	      = "output"
+checkpointFileNumber  = 0
+output_directory	  = "output"
 
 # IO
 wr_integrals_freq	           = 10
 checkpointFileIntervalStep     = 0
-checkpointFileIntervalTime     = 0.001
+checkpointFileIntervalTime     = 0.01
 plotFileIntervalStep           = 0
 plotFileIntervalTime           = 0.00
 particleFileIntervalTime       = 0.000
@@ -15,18 +15,6 @@ wall_clock_time_limit          = 200000
 
 #particles
 useparticles = .false.
-pt_dtfactor  = 0.5
-pt_numR      = 200
-pt_numT      = 160
-pt_numP      = 1
-
-pt_initialRMin   = 1.97d8 #unique to every progenitor and t_init, center around region of interest
-pt_initialRMax   = 7.0d8 #unique to every progenitor and t_init, center around region of interest
-pt_initialCTMin  = -1.0d0
-pt_initialCTMax  = 1.0d0
-pt_initialPMin   = 0.0d0
-pt_initialPMax   = 6.2831853072d0
-pt_maxPerProc    = 32000
 
 # Time
 tinitial              = 0.
@@ -154,20 +142,20 @@ hole_time		= 0.0 #3.0
 hole_vel		= 0.0 #1.0e7
 
 # Nuclear Burning
- useBurn             = True
- useBurnTable        = .FALSE.
- burnUpdateEint      = .FALSE.
- enucDtFactor        = 1.e30
- nuclearDensMax      = 1.0E17
- nuclearDensMin      = 1.0E-10
- nuclearNI56Max      = 1.0
- nuclearTempMax      = 1.0E12
- nuclearTempMin      = 1.1E8
- odeStepper          = 1
- algebra             = 1
- useShockBurn        = .FALSE.
- bn_useNSE           = True
- nse_dens            = 1e9
+useBurn             = True
+useBurnTable        = .FALSE.
+burnUpdateEint      = .FALSE.
+enucDtFactor        = 1.e30
+nuclearDensMax      = 1.0E17
+nuclearDensMin      = 1.0E-10
+nuclearNI56Max      = 1.0
+nuclearTempMax      = 1.0E12
+nuclearTempMin      = 1.1E8
+odeStepper          = 1
+algebra             = 1
+useShockBurn        = .FALSE.
+bn_useNSE           = True
+nse_dens            = 1e9
 
 #MLT
 useMLT        = False
@@ -227,14 +215,6 @@ useHalfState		   = .false.
 
 # EnergyDeposition - Jets
 useEnergyDeposition	  = .FALSE.
-#jetAngleN		      = 0.52
-#jetAngleS		      = 0.52
-#jetAccN		      = 5.0e10
-#jetAccS		      = 1.0e10
-#jetTimeN		      = 2.0
-#jetTimeS		      = 0.0
-#jetRad			      = 4.0e8
-#heat_fact		      = 1.0
 			      			       
 # Small numbers
 smallt    = 1.2e0
