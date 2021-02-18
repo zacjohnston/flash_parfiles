@@ -1,0 +1,138 @@
+# =======================================================
+#	Runtime parameters for the Sod shock-tube problem.
+# =======================================================
+basenm          = "sod3d_128_"                              ##**
+run_comment     = "Sod scaling tests, grid-aligned shock"
+
+nblockx         = 1                                         ##**
+nblocky         = 2                                         ##**
+nblockz         = 1                                         ##**
+
+#Comment out lrefine_min for flux correction below
+lrefine_min     = 3                                         ##**
+lrefine_max     = 3                                         ##**
+nrefs           = 10000
+
+#If lrefine_min /= lrefine_max above, comment out 2 lines below
+##No need for primitive-to-conservative conversions in Pseudo-UG mode
+convertToConsvdForMeshCalls = .FALSE.                       ##**
+convertToConsvdInMeshInterp = .FALSE.                       ##**
+
+nend            = 100
+tmax            = 1000.
+summaryOutputOnly = .true.
+
+#threading
+threadHydroWithinBlock = .TRUE.                             ##**
+
+# =======================================================
+# =======================================================
+# Hydro
+useHydro          = .TRUE.
+cfl               = 0.3
+interpol_order    = 2
+updateHydroFluxes = .TRUE.
+eintSwitch	  = 0.0 # Always use Etot
+
+## SWITCHES FOR SPARK ##
+lim_rad = 0.01
+use_hybridRiemann = .true.
+cvisc       = 0.  # coefficient for artificial viscosity (turned off)
+flux_correct   = .true.
+
+#use_flattening  = .true. (false below)
+# =======================================================
+
+#		Density, pressure, and velocity on either side of interface
+sim_rhoLeft	= 1.
+sim_rhoRight	= 0.125
+sim_pLeft		= 1.
+sim_pRight		= 0.1
+sim_uLeft		= 0.
+sim_uRight		= 0.
+
+#		Angle and position of interface relative to x and y axes
+sim_xangle		= 0
+sim_yangle		= 90.
+sim_posn		= 0.5
+
+#		Gas ratio of specific heats
+gamma           = 1.4
+
+#		Grid dimensionality and geometry
+geometry = cartesian
+
+#		Size of computational volume
+xmin		= 0.
+xmax		= 1.
+ymin		= 0.
+ymax		= 1.
+
+#		Boundary conditions
+xl_boundary_type = "outflow"
+xr_boundary_type = "outflow"
+
+yl_boundary_type = "outflow"
+yr_boundary_type = "outflow"
+
+#tiling
+gr_enableTiling = .TRUE.
+gr_useTiling = .TRUE.
+gr_tileSizeX = 4
+gr_tileSizeY = 2
+gr_tileSizeZ = 1
+hy_useTiling = .FALSE.
+
+#	Simulation (grid, time, I/O) parameters
+restart         = .false.
+output_directory = "output"
+
+#	checkpoint file output parameters
+checkpointFileIntervalTime = 0.
+checkpointFileIntervalStep = 0
+checkpointFileNumber = 0
+
+#	plotfile output parameters
+plotfileIntervalTime = 0.0
+plotfileIntervalStep = 0
+plotfileNumber = 0
+
+plot_var_1 = "dens"
+plot_var_2 = "pres"
+plot_var_3 = "temp"
+
+#    AMR refinement parameters  
+refine_var_1    = "dens"
+
+# -------------------------------------------------------------##
+##  SWITCHES SPECIFIC TO THE UNSPLIT HYDRO SOLVER               ##
+#       I. INTERPOLATION SCHEME:
+order           = 2      # Interpolation order (first/second/third/fifth order)
+slopeLimiter    = "mc"   # Slope limiters (minmod, mc, vanLeer, hybrid, limited)
+LimitedSlopeBeta= 1.     # Slope parameter for the "limited" slope by Toro
+charLimiting    = .true. # Characteristic limiting vs. Primitive limiting
+
+use_avisc       = .false. # use artificial viscosity (originally for PPM)
+#cvisc          = 0.1     # coefficient for artificial viscosity
+use_flattening  = .false. # use flattening (dissipative) (originally for PPM)
+use_steepening  = .false. # use contact steepening (originally for PPM)
+use_upwindTVD   = .false. # use upwind biased TVD slope for PPM (need nguard=6)
+
+#       II. RIEMANN SOLVERS:
+RiemannSolver   = "HLLC"       # Roe, HLL, HLLC, LLF, Marquina
+entropy         = .false.     # Entropy fix for the Roe solver
+
+hy_fPresInMomFlux = 1.0       # Part of pressure gradient term in momentum equation to include in momentum fluxes
+
+#       III. STRONG SHOCK HANDELING SCHEME:
+shockDetect     = .false.     # Shock Detect for numerical stability
+## -------------------------------------------------------------##
+
+## ---------------------------------------------------------------##
+##  SWITCHES SPECIFIC TO THE SUPER-TIME-STEPPING (STS) ALGORITHM  ##
+##  NOTE: For details on using STS runtime parameters, please     ##
+##        refer to user's guide (Driver chapter).                 ##
+useSTS                  = .false.
+nstepTotalSTS           = 5
+nuSTS                   = 0.2
+## ---------------------------------------------------------------##

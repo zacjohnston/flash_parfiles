@@ -1,0 +1,105 @@
+# =======================================================
+#	Runtime parameters for the Sod shock-tube problem.
+# =======================================================
+basenm          = "sod3d_8_"
+run_comment     = "Sod scaling tests, grid-aligned shock"
+
+nblockx         = 1
+nblocky         = 1
+nblockz         = 1
+
+#Comment out lrefine_min for flux correction below
+lrefine_min     = 2
+lrefine_max     = 2
+nrefs           = 10000  # dont refine during run
+
+nend            = 1000
+tmax            = 10000.
+summaryOutputOnly = .true.
+
+#If lrefine_min /= lrefine_max above, comment out 2 lines below
+##No need for primitive-to-conservative conversions in Pseudo-UG mode
+#convertToConsvdForMeshCalls = .FALSE.                       ##**
+#convertToConsvdInMeshInterp = .FALSE.                       ##**
+
+threadHydroWithinBlock = .TRUE.                             ##**
+
+# =======================================================
+# =======================================================
+# Hydro
+useHydro            = .TRUE.
+cfl              = 0.3
+interpol_order         = 2
+updateHydroFluxes	= .TRUE.
+eintSwitch	= 0.0 # Always use Etot
+
+## SWITCHES FOR SPARK ##
+lim_rad = 0.01
+use_hybridRiemann = .true.
+cvisc       = 0.0  # coefficient for artificial viscosity
+flux_correct   = .true.
+
+# =======================================================
+
+
+#		Density, pressure, and velocity on either side of interface
+sim_rhoLeft	= 1.
+sim_rhoRight	= 0.125
+sim_pLeft		= 1.
+sim_pRight		= 0.1
+sim_uLeft		= 0.
+sim_uRight		= 0.
+
+#		Angle and position of interface relative to x and y axes
+sim_xangle		= 0
+sim_yangle		= 90.
+sim_posn		= 0.5
+
+#		Gas ratio of specific heats
+gamma           = 1.4
+
+#		Grid dimensionality and geometry
+geometry = cartesian
+
+#		Size of computational volume
+xmin		= 0.
+xmax		= 1.
+ymin		= 0.
+ymax		= 1.
+
+#		Boundary conditions
+xl_boundary_type = "outflow"
+xr_boundary_type = "outflow"
+
+yl_boundary_type = "outflow"
+yr_boundary_type = "outflow"
+
+#tiling
+gr_enableTiling = .TRUE.
+gr_useTiling = .TRUE.
+gr_tileSizeX = 4
+gr_tileSizeY = 2
+gr_tileSizeZ = 1
+hy_useTiling = .FALSE.
+
+#	Simulation (grid, time, I/O) parameters
+restart         = .false.
+output_directory = "output"
+
+#	checkpoint file output parameters
+checkpointFileIntervalTime = 0.
+checkpointFileIntervalStep = 0
+checkpointFileNumber = 0
+
+#	plotfile output parameters
+plotfileIntervalTime = 0.0
+plotfileIntervalStep = 0
+plotfileNumber = 0
+
+plot_var_1 = "dens"
+plot_var_2 = "pres"
+plot_var_3 = "temp"
+
+#    AMR refinement parameters  
+refine_var_1    = "dens"
+
