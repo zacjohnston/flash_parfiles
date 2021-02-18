@@ -7,7 +7,7 @@ output_directory	      = "output"
 # IO
 wr_integrals_freq	           = 10
 checkpointFileIntervalStep     = 0
-checkpointFileIntervalTime     = 0.001
+checkpointFileIntervalTime     = 0.01
 plotFileIntervalStep           = 0
 plotFileIntervalTime           = 0.00
 particleFileIntervalTime       = 0.000
