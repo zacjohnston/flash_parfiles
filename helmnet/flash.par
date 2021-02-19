@@ -1,5 +1,5 @@
 # Parameters file for 1D M1 Core Collapse with NucNet + Helmholtz 
-basenm			      = "helmnet_"
+basenm			      = "run_"
 restart			      = False
 checkpointFileNumber  = 0
 output_directory	  = "output"
