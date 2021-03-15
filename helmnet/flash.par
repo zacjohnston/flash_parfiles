@@ -155,7 +155,7 @@ odeStepper          = 1
 algebra             = 1
 useShockBurn        = .FALSE.
 bn_useNSE           = True
-nse_dens            = 6e7
+nse_dens            = 1e9
 
 #MLT
 useMLT        = False
