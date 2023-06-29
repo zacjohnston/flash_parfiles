@@ -111,6 +111,12 @@ eosMode        = "dens_ie"
 eosModeInit    = "dens_temp"
 gamma          = 1.2
 
+# Hybrid EOS
+eos_usehybrid            =  False
+eos_hybtransitiondens    =  4e5
+eos_hybtransitionlow     =  2e5
+eos_hybdecrease          =  1e-2
+
 # RadTrans/M1
 rt_useRadTrans    = True
 rt_opacTable      = "./NuLib_SFHo.h5"
